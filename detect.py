@@ -5,8 +5,11 @@ import os
 import time
 from vgg16 import VGGnet  # 导入您自定义的 VGGnet 类
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 # 加载模型
 model = VGGnet(num_classes=4)  # 确保num_classes与训练时一致
+model.to(device)  # 将模型移动到 GPU
 try:
     model.load_state_dict(torch.load('best.pt'))  # 加载权重
     print('Model weights loaded successfully.')

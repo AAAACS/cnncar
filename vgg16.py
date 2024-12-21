@@ -11,11 +11,7 @@ class VGGnet(nn.Module):
         set_parameter_requires_grad(self.features, feature_extract)#固定特征提取层参数
         self.avgpool=model.avgpool
         self.classifier = nn.Sequential(
-            nn.Linear(512*7*7 , 1024),
-            nn.ReLU(),
-            nn.Linear(1024, 1024),
-            nn.ReLU(),
-            nn.Linear(1024, num_classes)
+            nn.Linear(512*7*7 , num_classes),
         )
         
     def forward(self, x):
